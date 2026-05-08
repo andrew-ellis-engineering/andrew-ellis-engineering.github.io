@@ -200,8 +200,8 @@ export default function App() {
         <section className="section surface-band" aria-labelledby="signal-title">
           <div className="container signal-grid">
             <div>
-              <p className="section-label">Selected signal</p>
-              <h2 id="signal-title">Named work, real constraints.</h2>
+              <p className="section-label">The Work</p>
+              <h2 id="signal-title">Not everything, just the things that were actually hard.</h2>
             </div>
             <div className="case-study-list">
               {caseStudies.map((study) => (
