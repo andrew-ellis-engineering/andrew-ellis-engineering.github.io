@@ -63,7 +63,7 @@
   letter-spacing: 0.04em;
   text-transform: capitalize;
   cursor: pointer;
-  transition: background-color 150ms ease, color 150ms ease;
+  transition: background-color 150ms ease, color 150ms ease, transform 120ms var(--ease-out);
 }
 
 .nav-theme-button:hover {
@@ -487,5 +487,61 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.25rem;
+  }
+}
+
+/* ── MOTION ──
+   Scroll-reveal entrances + hover polish. Transform/opacity only, so it
+   stays on the GPU. Elements are hidden ONLY when JS is present (html.js);
+   with no JS the content renders normally and is never trapped behind an
+   animation. prefers-reduced-motion keeps the fade but drops the movement. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Press feedback — the toggle should feel like it heard the click */
+.nav-theme-button:active {
+  transform: scale(0.96);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .portrait {
+    transition: transform 0.6s var(--ease-out), filter 0.6s ease, opacity 0.6s ease;
+  }
+  .portrait-wrap:hover .portrait {
+    transform: scale(1.03);
+    filter: saturate(1);
+    opacity: 1;
+  }
+  .contact-link strong {
+    transition: transform 0.2s var(--ease-out);
+  }
+  .contact-link:hover strong {
+    transform: translateX(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    transform: none;
+    transition: opacity 0.4s ease;
+  }
+  .js .reveal.is-visible {
+    transform: none;
+  }
+  .portrait,
+  .contact-link strong {
+    transition: none;
+  }
+  .portrait-wrap:hover .portrait {
+    transform: none;
   }
 }
