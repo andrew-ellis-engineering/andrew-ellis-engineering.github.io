@@ -59,7 +59,7 @@ const timeline: TimelineItem[] = [
       "I focus on CI/CD, test automation strategy, code coverage, static analysis, IaC, and observability because those are the controls that keep a migration from becoming a pile of exceptions and heroics."
   },
   {
-    period: "Why this fits me",
+    period: "Why this fits",
     title: "The job is understanding the system, not just the code",
     detail:
       "The useful part of my work is not writing one more service. It is understanding what the system is for, how it fails, who depends on it, and where weak process turns into operational risk."
@@ -153,31 +153,46 @@ export default function App() {
         Skip to main content
       </a>
 
-      <header className="site-header">
-        <div className="container masthead">
-          <div className="masthead-copy">
-            <div className="masthead-topline">
-              <p className="kicker">Andrew Ellis</p>
-              <div className="theme-toggle" role="group" aria-label="Color theme">
-                {(["system", "light", "dark"] as ThemePreference[]).map((theme) => (
-                  <button
-                    key={theme}
-                    type="button"
-                    className={`theme-toggle-button${themePreference === theme ? " is-active" : ""}`}
-                    onClick={() => setThemePreference(theme)}
-                    aria-pressed={themePreference === theme}
-                  >
-                    {theme}
-                  </button>
-                ))}
-              </div>
-            </div>
+      <nav className="site-nav" aria-label="Primary">
+        <div className="container nav-inner">
+          <div className="nav-brand">
+            <svg className="nav-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+              <g fill="none" stroke="currentColor" strokeWidth="12" strokeLinecap="square">
+                <path d="M22 22 H82" />
+                <path d="M22 52 H82" />
+                <path d="M52 82 H82" />
+                <path d="M22 22 V82" />
+                <path d="M52 22 V82" />
+              </g>
+            </svg>
+            <span className="nav-name">Andrew Ellis</span>
+          </div>
+          <div className="nav-theme" role="group" aria-label="Color theme">
+            {(["system", "light", "dark"] as ThemePreference[]).map((theme) => (
+              <button
+                key={theme}
+                type="button"
+                className={`nav-theme-button${themePreference === theme ? " is-active" : ""}`}
+                onClick={() => setThemePreference(theme)}
+                aria-pressed={themePreference === theme}
+              >
+                {theme}
+              </button>
+            ))}
+          </div>
+        </div>
+      </nav>
+
+      <header className="hero">
+        <div className="container hero-grid">
+          <div className="hero-copy">
+            <p className="hero-eyebrow">Lead Software Engineer · Capital One</p>
             <h1>I build the quality bar for systems too large to fake.</h1>
-            <p className="intro-statement">
+            <p className="hero-intro">
               I am a Lead Software Engineer at Capital One working on Project Destination, the integration of the tech
               assets built by Hopper for Capital One Travel.
             </p>
-            <p className="intro-support">
+            <p className="hero-support">
               Most of my work sits where reliability, migration risk, and organizational ambiguity meet. I tend to be
               most useful when the system is sprawling, the ownership is messy, and someone needs to make testing,
               delivery, infrastructure, and observability coherent enough that other engineers can trust what they are
@@ -185,30 +200,35 @@ export default function App() {
             </p>
           </div>
 
-          <aside className="identity-panel" aria-label="Professional profile">
-            <img src={headShot} alt="Portrait of Andrew Ellis" className="portrait" />
-            <div className="identity-meta">
-              <p>Lead Software Engineer</p>
-              <p>Capital One</p>
-              <p>Test strategy, IaC, observability, modernization</p>
+          <aside className="hero-aside" aria-label="Professional profile">
+            <div className="portrait-wrap">
+              <img src={headShot} alt="Portrait of Andrew Ellis" className="portrait" />
+            </div>
+            <div className="portrait-caption">
+              <p className="portrait-role">Lead Software Engineer, Capital One</p>
+              <p className="portrait-detail">
+                Test strategy · Infrastructure as code
+                <br />
+                Observability · Modernization
+              </p>
             </div>
           </aside>
         </div>
       </header>
 
       <main id="main-content">
-        <section className="section surface-band" aria-labelledby="signal-title">
-          <div className="container signal-grid">
-            <div>
+        <section className="section surface" aria-labelledby="work-title">
+          <div className="container section-grid">
+            <div className="section-head">
               <p className="section-label">The Work</p>
-              <h2 id="signal-title">Not everything, just the things that were actually hard.</h2>
+              <h2 id="work-title">Not everything, just the things that were actually hard.</h2>
             </div>
-            <div className="case-study-list">
+            <div className="case-list">
               {caseStudies.map((study) => (
-                <article key={study.title} className="case-study-card">
+                <article key={study.title} className="case-card">
                   <h3>{study.title}</h3>
                   <p>{study.context}</p>
-                  <p>{study.outcome}</p>
+                  <p className="case-outcome">{study.outcome}</p>
                 </article>
               ))}
             </div>
@@ -216,29 +236,27 @@ export default function App() {
         </section>
 
         <section className="section" aria-labelledby="approach-title">
-          <div className="container split-section">
-            <div>
+          <div className="container section-grid">
+            <div className="section-head">
               <p className="section-label">Approach</p>
               <h2 id="approach-title">I care how the system fails.</h2>
               <p className="section-intro">
-                My background was not a straight line, and that helps. I spent time in cryptography research, in a
-                distillery, in QA, and in platform work. The through line is paying attention to failure modes, weak
-                assumptions, and the cost of leaving someone else a brittle system.
+                My background was not a straight line, and that helps. The through line across cryptography research, a
+                distillery, QA, and platform work is paying attention to failure modes, weak assumptions, and the cost
+                of leaving someone else a brittle system.
               </p>
             </div>
-            <div className="text-panel">
-              <ul className="principles-list">
-                {principles.map((principle) => (
-                  <li key={principle}>{principle}</li>
-                ))}
-              </ul>
-            </div>
+            <ul className="principles-list">
+              {principles.map((principle) => (
+                <li key={principle}>{principle}</li>
+              ))}
+            </ul>
           </div>
         </section>
 
-        <section className="section timeline-section" aria-labelledby="timeline-title">
-          <div className="container split-section">
-            <div>
+        <section className="section surface" aria-labelledby="timeline-title">
+          <div className="container section-grid">
+            <div className="section-head">
               <p className="section-label">Current focus</p>
               <h2 id="timeline-title">What I am doing now.</h2>
             </div>
@@ -246,8 +264,10 @@ export default function App() {
               {timeline.map((item) => (
                 <article key={item.title} className="timeline-item">
                   <p className="timeline-period">{item.period}</p>
-                  <h3>{item.title}</h3>
-                  <p>{item.detail}</p>
+                  <div className="timeline-body">
+                    <h3>{item.title}</h3>
+                    <p>{item.detail}</p>
+                  </div>
                 </article>
               ))}
             </div>
@@ -255,24 +275,22 @@ export default function App() {
         </section>
 
         <section className="section" aria-labelledby="capabilities-title">
-          <div className="container split-section">
-            <div>
+          <div className="container section-grid">
+            <div className="section-head">
               <p className="section-label">Capabilities</p>
               <h2 id="capabilities-title">Where I tend to be most useful.</h2>
             </div>
-            <div className="text-panel">
-              <ul className="capability-list">
-                {capabilities.map((capability) => (
-                  <li key={capability}>{capability}</li>
-                ))}
-              </ul>
-            </div>
+            <ul className="capability-list">
+              {capabilities.map((capability) => (
+                <li key={capability}>{capability}</li>
+              ))}
+            </ul>
           </div>
         </section>
 
-        <section className="section surface-band" aria-labelledby="personal-title">
-          <div className="container signal-grid">
-            <div>
+        <section className="section surface" aria-labelledby="personal-title">
+          <div className="container section-grid">
+            <div className="section-head">
               <p className="section-label">Personal</p>
               <h2 id="personal-title">The reason any of this matters.</h2>
               <p className="section-intro">
@@ -280,9 +298,9 @@ export default function App() {
                 relation to them.
               </p>
             </div>
-            <div className="case-study-list">
+            <div className="personal-grid">
               {personal.map((item) => (
-                <article key={item.title} className="case-study-card">
+                <article key={item.title} className="personal-card">
                   <h3>{item.title}</h3>
                   <p>{item.detail}</p>
                 </article>
@@ -291,9 +309,9 @@ export default function App() {
           </div>
         </section>
 
-        <section className="section contact-section" aria-labelledby="contact-title">
-          <div className="container contact-block">
-            <div>
+        <section className="section" aria-labelledby="contact-title">
+          <div className="container section-grid">
+            <div className="section-head">
               <p className="section-label">Contact</p>
               <h2 id="contact-title">Reach out if the work is real.</h2>
               <p className="section-intro">
@@ -309,7 +327,7 @@ export default function App() {
                     target={link.href.startsWith("http") ? "_blank" : undefined}
                     rel={link.href.startsWith("http") ? "noreferrer" : undefined}
                     className="contact-link"
-                    aria-label={`${link.label} ${link.value}`}
+                    aria-label={`${link.label}: ${link.value}`}
                   >
                     <span>{link.label}</span>
                     <strong>{link.value}</strong>
@@ -324,6 +342,7 @@ export default function App() {
       <footer className="site-footer">
         <div className="container footer-inner">
           <p>Built with care. Last updated May 2026.</p>
+          <p>Andrew Ellis · Lead Software Engineer</p>
         </div>
       </footer>
     </div>
