@@ -22,6 +22,9 @@
   --color-focus: #a85f22;
 
   --max-width: 71.25rem; /* 1140px */
+
+  /* Strong ease-out for entrances — the built-in curves are too weak */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @media (prefers-color-scheme: dark) {
